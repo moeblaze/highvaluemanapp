@@ -1,0 +1,30 @@
+{
+  "sheets": {
+    "webAppUrl": "",
+    "truthsWebAppUrl": ""
+  },
+  "stripe": {
+    "publishableKey": "pk_live_or_test",
+    "priceId": "price_xxx",
+    "successUrl": "/success.html",
+    "cancelUrl": "/cancel.html",
+    "portalUrl": "",
+    "portalCreateUrl": ""
+  },
+  "bmacUrl": "https://www.buymeacoffee.com/yourname",
+  "adsense": {
+    "clientId": "ca-pub-xxxxxxxxxxxxxxxx",
+    "slotId": "xxxxxxxxxx"
+  },
+  "analytics": {
+    "gtagId": "G-XXXXXXXXXX"
+  },
+  "firebase": {
+    "apiKey": "YOUR_FIREBASE_API_KEY",
+    "authDomain": "YOUR_PROJECT.firebaseapp.com",
+    "projectId": "YOUR_PROJECT_ID",
+    "storageBucket": "YOUR_PROJECT.appspot.com",
+    "messagingSenderId": "YOUR_SENDER_ID",
+    "appId": "YOUR_APP_ID"
+  }
+}
