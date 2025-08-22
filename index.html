@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#000000" />
+  <link rel="manifest" href="manifest.json" />
+  <title>High Value Man App</title>
+  <meta property="og:title" content="High Value Man App" />
+  <meta property="og:description" content="Harsh truths, real metrics, and a pipeline to level up for the man you want." />
+  <meta property="og:type" content="website" />
+  <meta property="twitter:card" content="summary_large_image" />
+  <link rel="stylesheet" href="static/css/styles.css" />
+  <script defer src="static/js/config-loader.js"></script>
+  <script defer src="static/js/entitlements.js"></script>
+</head>
+<body>
+  <div id="stickyCta" class="sticky-cta hidden">
+    <div class="sticky-inner">
+      <span class="sticky-msg">Free plan: <strong>3</strong> roasts/day & <strong>5</strong> memes/day.</span>
+      <span class="sticky-usage">Left: <span id="stickyRoasts">3</span> roasts · <span id="stickyMemes">5</span> memes</span>
+      <div class="sticky-ctas">
+        <button id="stickyUpgrade" class="submit-button small">Upgrade to Pro</button>
+      </div>
+      <button id="stickyDismiss" class="sticky-dismiss" aria-label="Dismiss">×</button>
+    </div>
+  </div>
+
+  <div class="millionaire-bg">
+    <div class="title-row">
+      <img src="static/img/logo.svg" alt="HVM Logo" class="app-logo" />
+      <h1 class="title animated fade-in">Evaluate Your High Value Status</h1>
+      <span id="proBadge" class="pro-badge hidden">PRO</span>
+    </div>
+
+    <form id="assessmentForm" class="card-grid">
+      <div class="input-card animated fade-in"><label>Ambition (1-10)</label><br/><input type="number" name="ambition" min="1" max="10" required /></div>
+      <div class="input-card animated fade-in"><label>Discipline (1-10)</label><br/><input type="number" name="discipline" min="1" max="10" required /></div>
+      <div class="input-card animated fade-in"><label>Purpose (1-10)</label><br/><input type="number" name="purpose" min="1" max="10" required /></div>
+      <div class="input-card animated fade-in"><label>Financial Status ($)</label><br/><input type="number" name="finance" min="0" required /></div>
+      <div class="input-card animated fade-in"><label>State of Residence</label><br/>
+        <select name="state" required>
+          <option>New York</option><option>California</option><option>Texas</option><option>Florida</option>
+          <option>South Carolina</option><option>Georgia</option><option>Illinois</option><option>Nevada</option>
+          <option>North Carolina</option><option>Tennessee</option><option>Mississippi</option><option>Alabama</option>
+          <option>Wyoming</option><option>Montana</option><option>Colorado</option>
+        </select>
+      </div>
+      <div class="input-card animated fade-in"><label>Health (1-10)</label><br/><input type="number" name="health" min="1" max="10" required /></div>
+      <div class="input-card animated fade-in"><label>Looks (1-10)</label><br/><input type="number" name="looks" min="1" max="10" required /></div>
+      <div class="input-card animated fade-in"><label>Charisma (1-10)</label><br/><input type="number" name="charisma" min="1" max="10" required /></div>
+      <div class="input-card animated fade-in"><label>Number of Children</label><br/><input type="number" name="children" min="0" max="10" required /></div>
+      <div class="input-card animated fade-in"><label>Number of Baby Daddies</label><br/><input type="number" name="babyDaddies" min="0" max="10" required /></div>
+      <div class="input-card animated fade-in"><label>Desired Man’s Salary ($30k - $1M)</label><br/><input type="number" name="desiredSalary" min="30000" max="1000000" required /></div>
+      <div class="input-card animated fade-in"><label>Leadership (1-10)</label><br/><input type="number" name="leadership" min="1" max="10" required /></div>
+    </form>
+
+    <div style="text-align:center;margin-top:20px;">
+      <button class="submit-button" type="submit" form="assessmentForm">Submit</button>
+    </div>
+
+    <div id="result" class="card result-card animated fade-in"></div>
+
+    <div id="readinessSection" class="readiness hidden">
+      <div class="readiness-header">
+        <h2>Readiness Score</h2>
+        <span id="readinessPercent" class="readiness-percent">0%</span>
+      </div>
+      <div class="readiness-flex">
+        <div class="ring-wrap">
+          <svg class="progress-ring" width="90" height="90">
+            <circle class="ring-bg" stroke="#333" stroke-width="10" fill="transparent" r="35" cx="45" cy="45"/>
+            <circle id="readinessRing" class="ring-fg" stroke="#ffd700" stroke-width="10" fill="transparent"
+                    r="35" cx="45" cy="45" stroke-linecap="round"
+                    style="transform: rotate(-90deg); transform-origin: 50% 50%;" />
+          </svg>
+        </div>
+        <div class="bar-wrap">
+          <div id="readinessBarWrap" class="readiness-bar-wrap">
+            <div id="readinessBar" class="readiness-bar"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section id="pipelineSection" class="pipeline hidden animated fade-in-up">
+      <h2 class="pipeline-title">Level-Up Pipeline</h2>
+      <div id="pipelineCards" class="pipeline-grid"></div>
+    </section>
+
+    <section class="submission-section">
+      <h2>💬 Submit Your Own Truth</h2>
+      <form id="truthForm">
+        <label class="submit-global"><input type="checkbox" id="submitGlobalToggle" checked> Submit to Global Leaderboard</label>
+        <input type="text" name="truthInput" id="truthInput" maxlength="240" placeholder="Drop your satirical dating truth..." required>
+        <button type="submit">Submit</button>
+      </form>
+      <div id="userTruths" class="submitted-truths"></div>
+      <div class="truth-tools">
+        <label><input type="checkbox" id="autorostToggle" checked> 🔥 Auto-Roast with AI</label>
+        <div class="meme-sizes">
+          <span>📐 Meme Template:</span>
+          <button type="button" class="size-btn" data-w="1080" data-h="1080">Square 1:1</button>
+          <button type="button" class="size-btn" data-w="1080" data-h="1920">Vertical 9:16</button>
+          <button type="button" class="size-btn" data-w="1600" data-h="900">Twitter/X 16:9</button>
+        </div>
+        <span>Usage:</span> <span class="usage-pill" id="roastUsage">0/3</span> roasts ·
+        <span class="usage-pill" id="memeUsage">0/5</span> memes &nbsp;|&nbsp;
+      </div>
+    </section>
+
+    <section id="globalLeaderboard" class="leaderboard hidden">
+      <h2>🌍 Global Truths Leaderboard</h2>
+      <div class="leaderboard-actions"><button id="btnRefreshLeaderboard">Refresh</button></div>
+      <div id="leaderboardList" class="leaderboard-list"></div>
+    </section>
+
+    <section id="streakWidget" class="streak hidden">
+      <div class="streak-head">
+        <h2>Daily Streak</h2>
+        <div class="streak-stats">
+          <span>Current: <strong id="streakCurrent">0</strong> days</span>
+          <span>Best: <strong id="streakBest">0</strong> days</span>
+        </div>
+      </div>
+      <button id="streakCheckin" class="streak-btn">Mark today done</button>
+    </section>
+
+    <section id="weeklyPlan" class="weekly hidden">
+      <h2>Weekly Email Plan</h2>
+      <p>Get a weekly plan tailored to your weak areas. Enter your email:</p>
+      <form id="weeklyForm" class="weekly-form">
+        <input type="email" name="email" id="weeklyEmail" placeholder="you@example.com" required />
+        <button type="submit">Subscribe</button>
+      </form>
+      <div id="weeklyMsg" class="weekly-msg"></div>
+    </section>
+
+    <section id="monetizeSection" class="monetize">
+      <h2>Unlock Pro & Support</h2>
+      <div class="monetize-grid">
+        <div class="mon-card">
+          <h3>Go Pro</h3>
+          <p>Unlimited AI Auto-Roasts, HD meme exports, priority features.</p>
+          <div class="cta-stack"><button id="btnCheckout">Upgrade</button> <button id="btnManage" class="ghost-cta">Manage Subscription</button></div>
+        </div>
+        <div class="mon-card">
+          <h3>Buy Me a Coffee</h3>
+          <p>Love the app? Tip the creators.</p>
+          <a id="bmacLink" class="bmac" target="_blank" rel="noopener">Support</a>
+        </div>
+        <div class="mon-card">
+          <h3>Sponsor</h3>
+          <div id="adBanner" class="ad-banner">Your ad could be here</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="proUpsell" class="upsell-section">
+      <h2>Why Go Pro?</h2>
+      <div class="compare">
+        <div class="col">
+          <h3>Free</h3>
+          <ul>
+            <li>Daily Roasts: 3</li>
+            <li>Meme Exports: 5/day</li>
+            <li>Square 1080 template</li>
+            <li>Ads shown</li>
+          </ul>
+        </div>
+        <div class="col pro">
+          <h3>PRO</h3>
+          <ul>
+            <li>Unlimited Roasts</li>
+            <li>Unlimited Meme Exports</li>
+            <li>HD Templates: 9:16 & 16:9</li>
+            <li>No Ads + PRO Badge</li>
+            <li>Priority Features & Support</li>
+          </ul>
+          <button class="submit-button" onclick="document.getElementById('btnCheckout').click()">Upgrade Now</button>
+        </div>
+      </div>
+      <div class="testimonials">
+        <div class="t-card"><p>“The pipeline plans + roasts snapped me out of fantasy. I improved fast.”</p><span>— A., NYC</span></div>
+        <div class="t-card"><p>“Pro memes + leaderboard grew my socials. Worth it.”</p><span>— M., ATL</span></div>
+        <div class="t-card"><p>“No ads, unlimited exports, smooth. Feels premium.”</p><span>— J., LA</span></div>
+      </div>
+      <div class="faq">
+        <h3>FAQ</h3>
+        <details><summary>Can I cancel anytime?</summary><p>Yes. Manage or cancel in the customer portal. Changes apply next cycle.</p></details>
+        <details><summary>Do I lose my truths and stats if I cancel?</summary><p>No. Your data and posts remain; you return to free limits.</p></details>
+      </div>
+    </section>
+  </div>
+
+  <audio autoplay loop volume="0.1" id="bg-music">
+    <source src="static/audio/lofi-luxury.mp3" type="audio/mp3">
+  </audio>
+
+  <div id="upsellModal" class="upsell-modal">
+    <div class="upsell-box">
+      <img src="static/img/logo.svg" alt="HVM" class="upsell-logo" />
+      <button id="upsellClose" class="upsell-close">×</button>
+      <h3 id="upsellTitle">Unlock Pro</h3>
+      <p id="upsellDesc">Unlimited auto-roasts, HD meme exports, no ads, VIP badge.</p>
+      <ul class="upsell-benefits">
+        <li>Unlimited AI Auto-Roasts</li>
+        <li>HD meme exports (9:16, 16:9)</li>
+        <li>No ads + VIP PRO badge</li>
+        <li>Priority features & support</li>
+      </ul>
+      <button id="modalUpgradeBtn" class="submit-button">Upgrade to Pro</button>
+    </div>
+  </div>
+
+  <script src="static/js/script.js"></script>
+  <script src="static/js/background.js"></script>
+  <script src="static/js/ui-paywall.js"></script>
+  <script src="static/js/truths.js"></script>
+  <script src="static/js/leaderboard.js"></script>
+  <script src="static/js/payments.js"></script>
+  <script src="static/js/auth.scaffold.js"></script>
+  <script src="static/js/sync.scaffold.js"></script>
+  <script src="static/js/analytics.js"></script>
+  <script src="static/js/cookie-consent.js"></script>
+  <script src="static/js/config-loader.js"></script>
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', ()=> navigator.serviceWorker.register('sw.js'));
+    }
+  </script>
+</body>
+</html>
